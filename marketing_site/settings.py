@@ -6,9 +6,11 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
-SECRET_KEY = config("SECRET_KEY", default="changeme")
-DEBUG = config("DEBUG", default=False, cast=bool)
-ALLOWED_HOSTS = ["*"]  # Render handles hostnames
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "fallback-secret-key")
+
+DEBUG = os.environ.get("DEBUG", "False") == "True"
+
+ALLOWED_HOSTS = ["procapture-light.onrender.com", "localhost", "127.0.0.1"]
 
 # Applications
 INSTALLED_APPS = [
